@@ -49,10 +49,4 @@ class Business: NSObject {
         
         // TODO: How to do distance?
     }
-    
-    class func getBusinessesArray(dataArray: [NSDictionary]) -> [Business] {
-        return dataArray.map({ (dict) in
-            Business(fromBusinessInfoDict: dict)
-        })
-    }
 }

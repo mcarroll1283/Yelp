@@ -29,7 +29,9 @@ class ViewController: UIViewController {
         
         client.searchWithTerm("Thai", success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             if let businessesInfo = response["businesses"] as? [NSDictionary] {
-                let businesses = Business.getBusinessesArray(businessesInfo)
+                let businesses = businessesInfo.map({ (dict) in
+                    Business(fromBusinessInfoDict: dict)
+                })
                 if businesses.count > 0 {
                     let business = businesses[0]
                     println(business.imageUrl)
