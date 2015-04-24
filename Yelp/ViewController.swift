@@ -28,7 +28,20 @@ class ViewController: UIViewController {
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
         client.searchWithTerm("Thai", success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-            println(response)
+            if let businessesInfo = response["businesses"] as? [NSDictionary] {
+                let businesses = Business.getBusinessesArray(businessesInfo)
+                if businesses.count > 0 {
+                    let business = businesses[0]
+                    println(business.imageUrl)
+                    println(business.name)
+                    println(business.ratingImageUrl)
+                    println(business.numReviews)
+                    println(business.address)
+                    println(business.categories)
+                } else {
+                    println("zero businesses")
+                }
+            }
             }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 println(error)
         }
