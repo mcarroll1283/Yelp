@@ -15,10 +15,12 @@ protocol FiltersViewControllerDelegate: class {
     func filtersViewController(filtersViewController: UIViewController, filtersDidChange filtersDict: [Int: Bool])
 }
 
-class FiltersViewController: UIViewController {
+class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     weak var delegate: FiltersViewControllerDelegate?
 
+    @IBOutlet weak var tableView: UITableView!
+    
     @IBAction func onCancel(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -32,15 +34,25 @@ class FiltersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("filters view controller viewDidLoad")
 
-        // Do any additional setup after loading the view.
+        tableView.dataSource = self
+        tableView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+        
     
 
     /*
