@@ -8,8 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    var businesses: [Business]!
+    
     var client: YelpClient!
     
     // You can register for Yelp API keys here: http://www.yelp.com/developers/manage_api_keys
@@ -29,11 +33,11 @@ class ViewController: UIViewController {
         
         client.searchWithTerm("Thai", success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             if let businessesInfo = response["businesses"] as? [NSDictionary] {
-                let businesses = businessesInfo.map({ (dict) in
+                self.businesses = businessesInfo.map({ (dict) in
                     Business(fromBusinessInfoDict: dict)
                 })
-                if businesses.count > 0 {
-                    let business = businesses[0]
+                if self.businesses.count > 0 {
+                    let business = self.businesses[0]
                     println(business.imageUrl)
                     println(business.name)
                     println(business.ratingImageUrl)
@@ -43,17 +47,40 @@ class ViewController: UIViewController {
                 } else {
                     println("zero businesses")
                 }
+                
+                self.tableView.reloadData()
             }
             }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 println(error)
         }
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        // This is in walkthrough, is this necessary?
+        // tableView.registerNib(UINib(nibName: "BusinessCell", bundle: nil), forCellReuseIdentifier: "BusinessCell")
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as BusinessCell
+        cell.business = businesses[indexPath.row]
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let businesses = self.businesses {
+            return businesses.count
+        } else {
+            return 0
+        }
+    }
 
 }
 
