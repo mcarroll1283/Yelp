@@ -17,10 +17,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var client: YelpClient!
     
     // You can register for Yelp API keys here: http://www.yelp.com/developers/manage_api_keys
-    let yelpConsumerKey = "vxKwwcR_NMQ7WaEiQBK_CA"
-    let yelpConsumerSecret = "33QCvh5bIF5jIHR5klQr7RtBDhQ"
-    let yelpToken = "uRcRswHFYa1VkDrGV6LAW2F8clGh5JHV"
-    let yelpTokenSecret = "mqtKIxMIR4iBtBPZCmCLEb-Dz3Y"
+    let yelpConsumerKey = "6JNzXvGKzzb8VKOaR-TfYQ"
+    let yelpConsumerSecret = "evystiqHI1q2JywYEFxtwuJEnvE"
+    let yelpToken = "YeLAcsCms6jZGfqLEofLqBQo_EyFoJVD"
+    let yelpTokenSecret = "iWX3Y-TOBBitvDm7FWg39Ikb08Q"
+    
+//    let yelpConsumerKey = "vxKwwcR_NMQ7WaEiQBK_CA"
+//    let yelpConsumerSecret = "33QCvh5bIF5jIHR5klQr7RtBDhQ"
+//    let yelpToken = "uRcRswHFYa1VkDrGV6LAW2F8clGh5JHV"
+//    let yelpTokenSecret = "mqtKIxMIR4iBtBPZCmCLEb-Dz3Y"
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -36,17 +41,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.businesses = businessesInfo.map({ (dict) in
                     Business(fromBusinessInfoDict: dict)
                 })
-                if self.businesses.count > 0 {
-                    let business = self.businesses[0]
-                    println(business.imageUrl)
-                    println(business.name)
-                    println(business.ratingImageUrl)
-                    println(business.numReviews)
-                    println(business.address)
-                    println(business.categories)
-                } else {
-                    println("zero businesses")
-                }
                 
                 self.tableView.reloadData()
             }
@@ -61,6 +55,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // tableView.registerNib(UINib(nibName: "BusinessCell", bundle: nil), forCellReuseIdentifier: "BusinessCell")
         
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.title = "Yelp"
     }
     
     override func didReceiveMemoryWarning() {

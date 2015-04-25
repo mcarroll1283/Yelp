@@ -22,9 +22,9 @@ class BusinessCell: UITableViewCell {
         didSet {
             thumbImageView.setImageWithURL(NSURL(string: business.imageUrl))
             nameLabel.text = business.name
-            distanceLabel.text = NSString(format: "%.2f", business.distance)
+            distanceLabel.text = NSString(format: "%.2fmi", business.distance)
             ratingImageView.setImageWithURL(NSURL(string: business.ratingImageUrl))
-            reviewCountLabel.text = NSString(format: "%d", business.numReviews)
+            reviewCountLabel.text = NSString(format: "%d Reviews", business.numReviews)
             addressLabel.text = business.address
             categoriesLabel.text = business.categories
         }
@@ -32,7 +32,13 @@ class BusinessCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        // Rounded corners on the image
+        self.thumbImageView.layer.cornerRadius = 3
+        self.thumbImageView.clipsToBounds = true
+        
+        // XXX: May not need this. It's an autolayout bug fix discussed in the video
+        //nameLabel.preferredMaxLayoutWidth = self.nameLabel.frame.size.width
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -40,5 +46,12 @@ class BusinessCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
+// XXX: May not need this. It's an autolayout bug fix discussed in the video
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//        nameLabel.preferredMaxLayoutWidth = self.nameLabel.frame.size.width
+//    }
 
 }

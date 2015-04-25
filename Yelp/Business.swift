@@ -45,8 +45,11 @@ class Business: NSObject {
             })
         }
         
-        distance = 0.0
-        
-        // TODO: How to do distance?
+        if let dictDistanceMeters = businessInfoDict["distance"] as? Double {
+            let milesPerMeter = 0.000621371
+            distance = milesPerMeter * dictDistanceMeters
+        } else {
+            distance = 0
+        }
     }
 }
