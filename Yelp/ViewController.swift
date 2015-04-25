@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -75,6 +75,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return businesses.count
         } else {
             return 0
+        }
+    }
+    
+    func filtersViewController(filtersViewController: UIViewController, filtersDidChange filtersDict: [Int: Bool]) {
+        println("filtersDidChange in ViewController")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // XXX: Weird stuff to get through the segue which goes from ViewController to a UINavigationController, to a FiltersViewController
+        let nc = segue.destinationViewController as UINavigationController
+        if let fvc = nc.topViewController as? FiltersViewController {
+            fvc.delegate = self
         }
     }
 
