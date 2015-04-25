@@ -16,6 +16,7 @@
 		5371BD791AE9FF2900A27759 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5371BD771AE9FF2900A27759 /* LaunchScreen.xib */; };
 		5371BD851AE9FF2900A27759 /* YelpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371BD841AE9FF2900A27759 /* YelpTests.swift */; };
 		5371BD901AE9FFD000A27759 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371BD8F1AE9FFD000A27759 /* YelpClient.swift */; };
+		53A0D4071AEB648D006450FC /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A0D4061AEB648D006450FC /* FiltersViewController.swift */; };
 		DC18848CA64C2F235D1A865E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A000D745283C3669D0D73A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		5371BD831AE9FF2900A27759 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5371BD841AE9FF2900A27759 /* YelpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpTests.swift; sourceTree = "<group>"; };
 		5371BD8F1AE9FFD000A27759 /* YelpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
+		53A0D4061AEB648D006450FC /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		E2F7AC80861A0AE956F0851B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EB6D38CD36E8B862450015CA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				5371BD701AE9FF2900A27759 /* ViewController.swift */,
+				53A0D4061AEB648D006450FC /* FiltersViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				5371BD711AE9FF2900A27759 /* ViewController.swift in Sources */,
 				536F96371AEA05AD008938F7 /* Business.swift in Sources */,
 				5371BD901AE9FFD000A27759 /* YelpClient.swift in Sources */,
+				53A0D4071AEB648D006450FC /* FiltersViewController.swift in Sources */,
 				5371BD6F1AE9FF2900A27759 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
