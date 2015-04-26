@@ -14,11 +14,25 @@ import UIKit
 //let filterSections: [String] = ["Categories", "Sort", "Radius", "Deals"]
 let filterSections: [String] = ["Categories", "Sort"]
 
+struct FilterConfiguration {
+    var categories: [String]
+    var selectedSort: String
+    init(_ categories: [String], selectedSort: String) {
+        self.categories = categories
+        self.selectedSort = selectedSort
+    }
+    // TODO: Should centralize this data format somewhere (it can be either
+    // "rating" or "distance". Defined here, and in SortCell)
+    static func defaultConfiguration() -> FilterConfiguration {
+        return FilterConfiguration([String](), selectedSort: "rating")
+    }
+}
+
 protocol FiltersViewControllerDelegate: class {
     // XXX: Why can't (shouldn't?) I use FiltersViewController as the type of the first argument below?
     // XXX: Understand this function declaration syntax. That 'filtersDidChange' seems to be an argument
     // name for the caller, but not for the callee (for the callee it's filtersDict)
-    func filtersViewController(filtersViewController: UIViewController, filtersDidChange categoryFilter: [String])
+    func filtersViewController(filtersViewController: UIViewController, filtersDidChange categoryFilter: FilterConfiguration)
 }
 
 class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterCellDelegate, SortCellDelegate {
@@ -213,7 +227,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
                     enabledCategories.append(categoryDict["code"]!)
                 }
             }
-            delegate.filtersViewController(self, filtersDidChange: enabledCategories)
+            delegate.filtersViewController(self, filtersDidChange: FilterConfiguration(enabledCategories, selectedSort:selectedSort))
         } else {
             println("Error: no delegate in FiltersViewController onApply")
         }

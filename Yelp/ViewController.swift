@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var searchBar: UISearchBar!
     
-    var categoryFilter: [String]?
+    var filterConfiguration: FilterConfiguration = FilterConfiguration.defaultConfiguration()
     
     // You can register for Yelp API keys here: http://www.yelp.com/developers/manage_api_keys
     let yelpConsumerKey = "6JNzXvGKzzb8VKOaR-TfYQ"
@@ -66,15 +66,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     private func searchYelp() {
-        client.searchWithTerm(searchBar.text, categoryFilter: categoryFilter, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        client.searchWithTerm(searchBar.text, categoryFilter: filterConfiguration.categories, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             if let businessesInfo = response["businesses"] as? [NSDictionary] {
                 self.businesses = businessesInfo.map({ (dict) in
                     Business(fromBusinessInfoDict: dict)
                 })
+                
                 let businessNames = self.businesses.map({ (business) in
                     business.name
                 })
                 println("\(businessNames.count) businesses found from API: \(businessNames)")
+                
+                self.businesses.sort({ (businessA, businessB) -> Bool in
+                    return businessA.isSortedBefore(businessB, selectedSort: self.filterConfiguration.selectedSort)
+                })
                 
                 self.tableView.reloadData()
             }
@@ -103,8 +108,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func filtersViewController(filtersViewController: UIViewController, filtersDidChange newCategoryFilter: [String]) {
-        categoryFilter = newCategoryFilter
+    func filtersViewController(filtersViewController: UIViewController, filtersDidChange newConfiguration: FilterConfiguration) {
+        filterConfiguration = newConfiguration
         searchYelp()
     }
     
