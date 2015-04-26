@@ -10,7 +10,7 @@ import UIKit
 
 // TODO: Implement these other filters
 //let filterSections: [String] = ["Categories", "Sort", "Radius", "Deals"]
-let filterSections: [String] = ["Categories", "Sort"]
+let filterSections: [String] = ["Categories", "Sort", "Radius"]
 
 enum SortOption {
     case Rating
@@ -241,32 +241,44 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 1 {
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
+            let cellCategory = categories[indexPath.row]
+            cell.typeLabel.text = cellCategory["name"]
+            
+            // TODO: This is inefficient but simple. If the category 'code' is in filterConfiguration.categories, then it's
+            // on, otherwise it's off.
+            // Faster would be to have FilterConfiguration with some method for looking up whether it's enabled using the
+            // index, in constant time. I wish my version of Swift had Sets.
+            cell.mySwitch.on = contains(ownFilterConfiguration.categories, cellCategory["code"]!)
+            
+            cell.delegate = self
+            return cell
+        case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("SortCell", forIndexPath: indexPath) as SortCell
             cell.delegate = self
             cell.sortOption = ownFilterConfiguration.selectedSort
             return cell
+        default: // 2
+            let cell = tableView.dequeueReusableCellWithIdentifier("RadiusCell", forIndexPath: indexPath) as RadiusCell
+            return cell
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
-        let cellCategory = categories[indexPath.row]
-        cell.typeLabel.text = cellCategory["name"]
-        
-        // TODO: This is inefficient but simple. If the category 'code' is in filterConfiguration.categories, then it's
-        // on, otherwise it's off.
-        // Faster would be to have FilterConfiguration with some method for looking up whether it's enabled using the
-        // index, in constant time. I wish my version of Swift had Sets.
-        cell.mySwitch.on = contains(ownFilterConfiguration.categories, cellCategory["code"]!)
-        
-        cell.delegate = self
-        return cell
+
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-             return categories.count
-        } else {
+        switch section {
+        case 0:
+            return categories.count
+        
+        case 1:
+            return 1
+        
+        default: // 2
             return 1
         }
+
     }
     
     func filterCell(filterCell: FilterCell, switchValueDidChange switchValue: Bool) {
