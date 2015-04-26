@@ -8,6 +8,9 @@
 
 import UIKit
 
+//let filterSections: [String] = ["Categories", "Sort", "Radius", "Deals"]
+let filterSections: [String] = ["Categories", "Sort"]
+
 protocol FiltersViewControllerDelegate: class {
     // XXX: Why can't (shouldn't?) I use FiltersViewController as the type of the first argument below?
     // XXX: Understand this function declaration syntax. That 'filtersDidChange' seems to be an argument
@@ -230,6 +233,9 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.section == 1 {
+            return tableView.dequeueReusableCellWithIdentifier("SortCell", forIndexPath: indexPath) as UITableViewCell
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
         cell.typeLabel.text = categories[indexPath.row]["name"]
         if let enabledState = filtersEnabledState[indexPath.row] {
@@ -242,7 +248,11 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        if section == 0 {
+            return categories.count
+        } else {
+            return 1
+        }
     }
     
     func filterCell(filterCell: FilterCell, switchValueDidChange switchValue: Bool) {
@@ -253,7 +263,16 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
             println("Error: no index path for cell in switchValueDidChange")
         }
     }
-        
+    
+    // Methods for table view section functionality below
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return filterSections.count
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return filterSections[section]
+    }
     
 
     /*
