@@ -8,6 +8,9 @@
 
 import UIKit
 
+// TODO: Pass filter state back in from main ViewController, so that selections are persisted
+// during app session
+
 //let filterSections: [String] = ["Categories", "Sort", "Radius", "Deals"]
 let filterSections: [String] = ["Categories", "Sort"]
 
@@ -18,7 +21,7 @@ protocol FiltersViewControllerDelegate: class {
     func filtersViewController(filtersViewController: UIViewController, filtersDidChange categoryFilter: [String])
 }
 
-class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterCellDelegate {
+class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterCellDelegate, SortCellDelegate {
     
     let categories: [[String: String]] = [["name" : "Afghan", "code": "afghani"],
         ["name" : "African", "code": "african"],
@@ -193,6 +196,8 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     var filtersEnabledState: [Int: Bool] = [Int: Bool]()
     
     weak var delegate: FiltersViewControllerDelegate?
+    
+    var selectedSort: String = "distance"
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -234,7 +239,9 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
-            return tableView.dequeueReusableCellWithIdentifier("SortCell", forIndexPath: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("SortCell", forIndexPath: indexPath) as SortCell
+            cell.delegate = self
+            return cell
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
         cell.typeLabel.text = categories[indexPath.row]["name"]
@@ -249,7 +256,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return categories.count
+             return categories.count
         } else {
             return 1
         }
@@ -272,6 +279,11 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return filterSections[section]
+    }
+    
+    func sortCell(sortCell: SortCell, sortChanged newSortValue: String) {
+        selectedSort = newSortValue
+        println("selected sort is now: \(selectedSort)")
     }
     
 

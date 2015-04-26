@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5315C0581AEC3022007DBC6A /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5315C0571AEC3022007DBC6A /* FilterCell.swift */; };
+		5337FB981AED81B7009D059D /* SortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5337FB971AED81B7009D059D /* SortCell.swift */; };
 		533C46701AEA1B3D007C36DF /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533C466F1AEA1B3D007C36DF /* BusinessCell.swift */; };
 		536F96371AEA05AD008938F7 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536F96361AEA05AD008938F7 /* Business.swift */; };
 		5371BD6F1AE9FF2900A27759 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371BD6E1AE9FF2900A27759 /* AppDelegate.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		27A000D745283C3669D0D73A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5315C0571AEC3022007DBC6A /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
+		5337FB971AED81B7009D059D /* SortCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortCell.swift; sourceTree = "<group>"; };
 		533C466F1AEA1B3D007C36DF /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		536F96321AEA0050008938F7 /* Yelp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Yelp-Bridging-Header.h"; sourceTree = "<group>"; };
 		536F96361AEA05AD008938F7 /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			children = (
 				533C466F1AEA1B3D007C36DF /* BusinessCell.swift */,
 				5315C0571AEC3022007DBC6A /* FilterCell.swift */,
+				5337FB971AED81B7009D059D /* SortCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5315C0581AEC3022007DBC6A /* FilterCell.swift in Sources */,
+				5337FB981AED81B7009D059D /* SortCell.swift in Sources */,
 				533C46701AEA1B3D007C36DF /* BusinessCell.swift in Sources */,
 				5371BD711AE9FF2900A27759 /* ViewController.swift in Sources */,
 				536F96371AEA05AD008938F7 /* Business.swift in Sources */,
