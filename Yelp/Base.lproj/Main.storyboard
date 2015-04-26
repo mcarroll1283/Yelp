@@ -164,17 +164,27 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3T8-d8-IvB" id="SvB-Dn-bHp">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1J4-Lv-Gd4">
-                                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1J4-Lv-Gd4">
+                                                    <rect key="frame" x="8" y="11" width="247" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nya-Fd-TJe">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nya-Fd-TJe">
                                                     <rect key="frame" x="263" y="6" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nya-Fd-TJe" firstAttribute="top" secondItem="SvB-Dn-bHp" secondAttribute="top" constant="6" id="0FO-rO-2aW"/>
+                                                <constraint firstItem="1J4-Lv-Gd4" firstAttribute="top" secondItem="SvB-Dn-bHp" secondAttribute="top" constant="11" id="0sh-RN-zrZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="nya-Fd-TJe" secondAttribute="trailing" constant="8" id="DfR-Uj-cLJ"/>
+                                                <constraint firstItem="1J4-Lv-Gd4" firstAttribute="leading" secondItem="SvB-Dn-bHp" secondAttribute="leading" constant="8" id="TOA-zu-s1A"/>
+                                                <constraint firstItem="nya-Fd-TJe" firstAttribute="leading" secondItem="1J4-Lv-Gd4" secondAttribute="trailing" constant="8" id="fns-Cq-YXl"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="typeLabel" destination="1J4-Lv-Gd4" id="XYS-IM-j4f"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
