@@ -15,7 +15,7 @@ protocol FiltersViewControllerDelegate: class {
     func filtersViewController(filtersViewController: UIViewController, filtersDidChange filtersDict: [Int: Bool])
 }
 
-class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterCellDelegate {
     
     let categories: [[String: String]] = [["name" : "Afghan", "code": "afghani"],
         ["name" : "African", "code": "african"],
@@ -187,6 +187,8 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
         ["name" : "Wraps", "code": "wraps"],
         ["name" : "Yugoslav", "code": "yugoslav"]]
     
+    var filtersEnabledState: [Int: Bool] = [Int: Bool]()
+    
     weak var delegate: FiltersViewControllerDelegate?
 
     @IBOutlet weak var tableView: UITableView!
@@ -197,7 +199,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func onApply(sender: AnyObject) {
         if let delegate = delegate {
-            delegate.filtersViewController(self, filtersDidChange: [Int : Bool]())
+            delegate.filtersViewController(self, filtersDidChange: filtersEnabledState)
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -217,11 +219,21 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
         cell.typeLabel.text = categories[indexPath.row]["name"]
+        cell.delegate = self
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
+    }
+    
+    func filterCell(filterCell: FilterCell, switchValueDidChange switchValue: Bool) {
+        let maybeIndexPath = tableView.indexPathForCell(filterCell)
+        if let indexPath = maybeIndexPath {
+            filtersEnabledState[indexPath.row] = switchValue
+        } else {
+            println("Error: no index path for cell in switchValueDidChange")
+        }
     }
         
     

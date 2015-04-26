@@ -8,9 +8,25 @@
 
 import UIKit
 
+protocol FilterCellDelegate: class {
+    func filterCell(filterCell: FilterCell, switchValueDidChange switchValue: Bool)
+}
+
 class FilterCell: UITableViewCell {
+    
+    weak var delegate: FilterCellDelegate?
 
     @IBOutlet weak var typeLabel: UILabel!
+    
+    @IBOutlet weak var mySwitch: UISwitch!
+    
+    @IBAction func switchValueChanged(sender: AnyObject) {
+        if let delegate = delegate {
+            delegate.filterCell(self, switchValueDidChange: mySwitch.on)
+        } else {
+            println("Error: FilterCell didn't have delegate")
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
