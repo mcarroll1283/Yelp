@@ -17,16 +17,33 @@ enum SortOption {
     case Distance
 }
 
+enum RadiusOption {
+    case Any
+    case ThousandMeters
+    case FiveHundredMeters
+    func radiusInMeters() -> Double? {
+        if self == .ThousandMeters {
+            return 1000
+        } else if self == .FiveHundredMeters {
+            return 500
+        } else {
+            return nil
+        }
+    }
+}
+
 struct FilterConfiguration {
     var categories: [String]
     var selectedSort: SortOption
-    init(_ categories: [String], selectedSort: SortOption) {
+    var selectedRadius: RadiusOption
+    init(_ categories: [String], selectedSort: SortOption, selectedRadius: RadiusOption) {
         self.categories = categories
         self.selectedSort = selectedSort
+        self.selectedRadius = selectedRadius
     }
 
     static func defaultConfiguration() -> FilterConfiguration {
-        return FilterConfiguration([String](), selectedSort: SortOption.Rating)
+        return FilterConfiguration([String](), selectedSort: SortOption.Rating, selectedRadius: RadiusOption.Any)
     }
 }
 
@@ -37,7 +54,7 @@ protocol FiltersViewControllerDelegate: class {
     func filtersViewController(filtersViewController: UIViewController, filtersDidChange categoryFilter: FilterConfiguration)
 }
 
-class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterCellDelegate, SortCellDelegate {
+class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterCellDelegate, SortCellDelegate, RadiusCellDelegate {
     
     let categories: [[String: String]] = [["name" : "Afghan", "code": "afghani"],
         ["name" : "African", "code": "african"],
@@ -262,6 +279,8 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
             return cell
         default: // 2
             let cell = tableView.dequeueReusableCellWithIdentifier("RadiusCell", forIndexPath: indexPath) as RadiusCell
+            cell.delegate = self
+            cell.radiusOption = ownFilterConfiguration.selectedRadius
             return cell
         }
 
@@ -312,6 +331,11 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     func sortCell(sortCell: SortCell, sortChanged newSortValue: SortOption) {
         ownFilterConfiguration.selectedSort = newSortValue
         println("selected sort is now: \(ownFilterConfiguration.selectedSort)")
+    }
+    
+    func radiusCell(radiusCell: RadiusCell, radiusChanged newRadiusValue: RadiusOption) {
+        ownFilterConfiguration.selectedRadius = newRadiusValue
+        println("radius is now: \(newRadiusValue)")
     }
     
 

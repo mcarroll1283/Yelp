@@ -17,6 +17,7 @@ class Business: NSObject {
     var categories: String!
     var distance: Double!
     var rating: Int!
+    var distanceMeters: Double!
     
     init(fromBusinessInfoDict businessInfoDict: NSDictionary) {
         super.init()
@@ -47,10 +48,12 @@ class Business: NSObject {
         }
         
         if let dictDistanceMeters = businessInfoDict["distance"] as? Double {
+            distanceMeters = dictDistanceMeters
             let milesPerMeter = 0.000621371
             distance = milesPerMeter * dictDistanceMeters
         } else {
             distance = 0
+            distanceMeters = 0
         }
         
         if let dictRating = businessInfoDict["rating"] as? Int {

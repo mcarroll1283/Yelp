@@ -246,9 +246,15 @@
                                                         <segment title="1000m"/>
                                                         <segment title="500m"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="onRadiusChanged:" destination="BPB-Fd-JQs" eventType="valueChanged" id="Y0U-sM-bNy"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="radiusControl" destination="gb1-c9-tyq" id="40X-fQ-uL4"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

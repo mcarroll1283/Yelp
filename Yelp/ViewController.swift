@@ -81,6 +81,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     return businessA.isSortedBefore(businessB, selectedSort: self.filterConfiguration.selectedSort)
                 })
                 
+                if let radiusMax = self.filterConfiguration.selectedRadius.radiusInMeters() {
+                    self.businesses = self.businesses.filter({ (business) -> Bool in
+                        business.distanceMeters <= radiusMax
+                    })
+                }
+                  
                 self.tableView.reloadData()
             }
             }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
