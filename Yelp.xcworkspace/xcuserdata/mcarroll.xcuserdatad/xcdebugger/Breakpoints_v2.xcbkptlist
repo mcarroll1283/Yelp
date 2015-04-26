@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yelp/ViewController.swift"
-            timestampString = "451715228.272632"
+            timestampString = "451716583.371534"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98">
+            startingLineNumber = "102"
+            endingLineNumber = "102">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yelp/ViewController.swift"
-            timestampString = "451679562.613923"
+            timestampString = "451716532.381161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -72,12 +72,144 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yelp/FiltersViewController.swift"
-            timestampString = "451715228.272632"
+            timestampString = "451719217.99691"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "filterCell(_:switchValueDidChange:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Yelp/YelpClient.swift"
+            timestampString = "451717788.182358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "searchWithTerm(_:categoryFilter:success:failure:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Yelp.YelpClient.searchWithTerm (Yelp.YelpClient)(Swift.String, categoryFilter : Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Swift.Bool&gt;&gt;, success : (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, Swift.ImplicitlyUnwrappedOptional&lt;Swift.AnyObject&gt;) -&gt; (), failure : (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSError&gt;) -&gt; ()) -&gt; Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;"
+                  moduleName = "Yelp"
+                  urlString = "file:///Users/mcarroll/Desktop/Yelp/Yelp/YelpClient.swift"
+                  timestampString = "451716656.62404"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "977">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "reabstraction thunk helper from @callee_owned (@owned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, @owned Swift.ImplicitlyUnwrappedOptional&lt;Swift.AnyObject&gt;) -&gt; (@unowned ()) to @callee_owned (@in (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, Swift.ImplicitlyUnwrappedOptional&lt;Swift.AnyObject&gt;)) -&gt; (@out ())"
+                  moduleName = "Yelp"
+                  urlString = "file:///Users/mcarroll/Desktop/Yelp/Yelp/YelpClient.swift"
+                  timestampString = "451716656.625368"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "reabstraction thunk helper from @callee_owned (@in (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, Swift.ImplicitlyUnwrappedOptional&lt;Swift.AnyObject&gt;)) -&gt; (@out ()) to @callee_owned (@owned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, @owned Swift.ImplicitlyUnwrappedOptional&lt;Swift.AnyObject&gt;) -&gt; (@unowned ())"
+                  moduleName = "Yelp"
+                  urlString = "file:///Users/mcarroll/Desktop/Yelp/Yelp/YelpClient.swift"
+                  timestampString = "451716656.625576"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "reabstraction thunk helper from @callee_owned (@owned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, @owned Swift.ImplicitlyUnwrappedOptional&lt;Swift.AnyObject&gt;) -&gt; (@unowned ()) to @callee_unowned @objc_block (@unowned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, @unowned Swift.ImplicitlyUnwrappedOptional&lt;Swift.AnyObject&gt;) -&gt; (@unowned ())"
+                  moduleName = "Yelp"
+                  urlString = "file:///Users/mcarroll/Desktop/Yelp/Yelp/YelpClient.swift"
+                  timestampString = "451716656.625751"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "reabstraction thunk helper from @callee_owned (@owned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, @owned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSError&gt;) -&gt; (@unowned ()) to @callee_owned (@in (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSError&gt;)) -&gt; (@out ())"
+                  moduleName = "Yelp"
+                  urlString = "file:///Users/mcarroll/Desktop/Yelp/Yelp/YelpClient.swift"
+                  timestampString = "451716656.625936"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "reabstraction thunk helper from @callee_owned (@in (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSError&gt;)) -&gt; (@out ()) to @callee_owned (@owned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, @owned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSError&gt;) -&gt; (@unowned ())"
+                  moduleName = "Yelp"
+                  urlString = "file:///Users/mcarroll/Desktop/Yelp/Yelp/YelpClient.swift"
+                  timestampString = "451716656.626139"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "reabstraction thunk helper from @callee_owned (@owned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, @owned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSError&gt;) -&gt; (@unowned ()) to @callee_unowned @objc_block (@unowned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.AFHTTPRequestOperation&gt;, @unowned Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSError&gt;) -&gt; (@unowned ())"
+                  moduleName = "Yelp"
+                  urlString = "file:///Users/mcarroll/Desktop/Yelp/Yelp/YelpClient.swift"
+                  timestampString = "451716656.626314"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Yelp/YelpClient.swift"
+            timestampString = "451718295.967817"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "searchWithTerm(_:categoryFilter:success:failure:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

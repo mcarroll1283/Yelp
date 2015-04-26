@@ -12,7 +12,7 @@ protocol FiltersViewControllerDelegate: class {
     // XXX: Why can't (shouldn't?) I use FiltersViewController as the type of the first argument below?
     // XXX: Understand this function declaration syntax. That 'filtersDidChange' seems to be an argument
     // name for the caller, but not for the callee (for the callee it's filtersDict)
-    func filtersViewController(filtersViewController: UIViewController, filtersDidChange filtersDict: [String: Bool])
+    func filtersViewController(filtersViewController: UIViewController, filtersDidChange categoryFilter: [String])
 }
 
 class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterCellDelegate {
@@ -199,11 +199,13 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func onApply(sender: AnyObject) {
         if let delegate = delegate {
-            var filtersEnabledByCode = [String: Bool]()
+            var enabledCategories = [String]()
             for (index, categoryDict) in enumerate(categories) {
-               filtersEnabledByCode[categoryDict["code"]!] = filtersEnabledState[index]
+                if filtersEnabledState[index]! {
+                    enabledCategories.append(categoryDict["code"]!)
+                }
             }
-            delegate.filtersViewController(self, filtersDidChange: filtersEnabledByCode)
+            delegate.filtersViewController(self, filtersDidChange: enabledCategories)
         } else {
             println("Error: no delegate in FiltersViewController onApply")
         }
@@ -215,6 +217,11 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
 
         tableView.dataSource = self
         tableView.delegate = self
+        
+        // TODO: some kind of persistence for filters enabled state?
+        for index in 0...categories.count {
+            filtersEnabledState[index] = false
+        }
     }
 
     override func didReceiveMemoryWarning() {

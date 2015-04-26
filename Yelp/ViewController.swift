@@ -36,7 +36,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view, typically from a nib.
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
-        client.searchWithTerm("Thai", success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        searchYelp("Thai", categoryFilter: nil)
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        // This is in walkthrough, is this necessary?
+        // tableView.registerNib(UINib(nibName: "BusinessCell", bundle: nil), forCellReuseIdentifier: "BusinessCell")
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.title = "Yelp"
+    }
+    
+    private func searchYelp(searchTerm: String, categoryFilter: [String]?) {
+        client.searchWithTerm(searchTerm, categoryFilter: categoryFilter, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             if let businessesInfo = response["businesses"] as? [NSDictionary] {
                 self.businesses = businessesInfo.map({ (dict) in
                     Business(fromBusinessInfoDict: dict)
@@ -48,15 +62,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 println(error)
         }
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        // This is in walkthrough, is this necessary?
-        // tableView.registerNib(UINib(nibName: "BusinessCell", bundle: nil), forCellReuseIdentifier: "BusinessCell")
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        
-        self.title = "Yelp"
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,9 +83,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func filtersViewController(filtersViewController: UIViewController, filtersDidChange filtersDict: [String: Bool]) {
-        println("filtersDidChange in ViewController")
-        println(filtersDict)
+    func filtersViewController(filtersViewController: UIViewController, filtersDidChange categoryFilter: [String]) {
+        searchYelp("Thai", categoryFilter: categoryFilter)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
