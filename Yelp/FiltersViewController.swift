@@ -14,17 +14,22 @@ import UIKit
 //let filterSections: [String] = ["Categories", "Sort", "Radius", "Deals"]
 let filterSections: [String] = ["Categories", "Sort"]
 
+enum SortOption {
+    case Rating
+    case Distance
+}
+
 struct FilterConfiguration {
     var categories: [String]
-    var selectedSort: String
-    init(_ categories: [String], selectedSort: String) {
+    var selectedSort: SortOption
+    init(_ categories: [String], selectedSort: SortOption) {
         self.categories = categories
         self.selectedSort = selectedSort
     }
     // TODO: Should centralize this data format somewhere (it can be either
     // "rating" or "distance". Defined here, and in SortCell)
     static func defaultConfiguration() -> FilterConfiguration {
-        return FilterConfiguration([String](), selectedSort: "rating")
+        return FilterConfiguration([String](), selectedSort: SortOption.Rating)
     }
 }
 
@@ -211,7 +216,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     weak var delegate: FiltersViewControllerDelegate?
     
-    var selectedSort: String = "distance"
+    var selectedSort: SortOption = SortOption.Distance
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -255,6 +260,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
         if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("SortCell", forIndexPath: indexPath) as SortCell
             cell.delegate = self
+            cell.sortOption = selectedSort
             return cell
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
@@ -270,7 +276,9 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-             return categories.count
+//             return categories.count
+//            XXX: UNDO
+            return 1
         } else {
             return 1
         }
@@ -295,7 +303,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
         return filterSections[section]
     }
     
-    func sortCell(sortCell: SortCell, sortChanged newSortValue: String) {
+    func sortCell(sortCell: SortCell, sortChanged newSortValue: SortOption) {
         selectedSort = newSortValue
         println("selected sort is now: \(selectedSort)")
     }

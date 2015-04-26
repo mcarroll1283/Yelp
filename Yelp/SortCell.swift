@@ -8,10 +8,11 @@
 
 import UIKit
 
-let sortValueStrings = ["distance", "rating"]
+let sortOptionsByIndex = [SortOption.Distance, SortOption.Rating]
+let indexesBySortOption = [SortOption.Distance: 0, SortOption.Rating: 1]
 
 protocol SortCellDelegate: class {
-    func sortCell(sortCell: SortCell, sortChanged newSortValue: String)
+    func sortCell(sortCell: SortCell, sortChanged newSortValue: SortOption)
 }
 
 class SortCell: UITableViewCell {
@@ -20,10 +21,12 @@ class SortCell: UITableViewCell {
     
     weak var delegate: SortCellDelegate?
     
+    var sortOption: SortOption?
+    
     @IBAction func onSortChanges(sender: AnyObject) {
         println("sort changed: \(sortControl.selectedSegmentIndex)")
         if let delegate = delegate {
-            delegate.sortCell(self, sortChanged: sortValueStrings[sortControl.selectedSegmentIndex])
+            delegate.sortCell(self, sortChanged: sortOptionsByIndex[sortControl.selectedSegmentIndex])
         } else {
             println("SortCell: no delegate in onSortChanges")
         }
@@ -31,7 +34,13 @@ class SortCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        if let sortOption = sortOption {
+            sortControl.selectedSegmentIndex = indexesBySortOption[sortOption]!
+        } else {
+            println("SortCell: No sortOption in awakeFromNib")
+            sortControl.selectedSegmentIndex = indexesBySortOption[SortOption.Rating]!
+        }
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

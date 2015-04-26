@@ -16,6 +16,7 @@ class Business: NSObject {
     var address: String!
     var categories: String!
     var distance: Double!
+    var rating: Int!
     
     init(fromBusinessInfoDict businessInfoDict: NSDictionary) {
         super.init()
@@ -51,13 +52,28 @@ class Business: NSObject {
         } else {
             distance = 0
         }
+        
+        if let dictRating = businessInfoDict["rating"] as? Int {
+            rating = dictRating
+        } else {
+            rating = 0
+        }
     }
     
     // TODO: Centralize definition of sort options. Spread between here, FiltersViewController, SortCell
     // Options are "rating", "distance"
-    func isSortedBefore(otherBusiness: Business, selectedSort: String) -> Bool {
-        // TODO: Implement sorting based on selectedSort argument
-        // Need to give Business a "rating" instance property
-        return self.numReviews! > otherBusiness.numReviews!
+    func isSortedBefore(otherBusiness: Business, selectedSort: SortOption) -> Bool {
+        switch selectedSort {
+        case SortOption.Rating:
+            return self.rating! > otherBusiness.rating!
+            
+        case SortOption.Distance:
+            return self.distance! < otherBusiness.distance
+            
+        default:
+            println("Business: unknown sort type \(selectedSort)")
+            return self.rating! > otherBusiness.rating!
+            
+        }
     }
 }
