@@ -12,7 +12,7 @@ protocol FiltersViewControllerDelegate: class {
     // XXX: Why can't (shouldn't?) I use FiltersViewController as the type of the first argument below?
     // XXX: Understand this function declaration syntax. That 'filtersDidChange' seems to be an argument
     // name for the caller, but not for the callee (for the callee it's filtersDict)
-    func filtersViewController(filtersViewController: UIViewController, filtersDidChange filtersDict: [Int: Bool])
+    func filtersViewController(filtersViewController: UIViewController, filtersDidChange filtersDict: [String: Bool])
 }
 
 class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterCellDelegate {
@@ -199,7 +199,13 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func onApply(sender: AnyObject) {
         if let delegate = delegate {
-            delegate.filtersViewController(self, filtersDidChange: filtersEnabledState)
+            var filtersEnabledByCode = [String: Bool]()
+            for (index, categoryDict) in enumerate(categories) {
+               filtersEnabledByCode[categoryDict["code"]!] = filtersEnabledState[index]
+            }
+            delegate.filtersViewController(self, filtersDidChange: filtersEnabledByCode)
+        } else {
+            println("Error: no delegate in FiltersViewController onApply")
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -219,6 +225,11 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
         cell.typeLabel.text = categories[indexPath.row]["name"]
+        if let enabledState = filtersEnabledState[indexPath.row] {
+            cell.mySwitch.on = enabledState
+        } else {
+            cell.mySwitch.on = false
+        }
         cell.delegate = self
         return cell
     }

@@ -78,8 +78,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func filtersViewController(filtersViewController: UIViewController, filtersDidChange filtersDict: [Int: Bool]) {
+    func filtersViewController(filtersViewController: UIViewController, filtersDidChange filtersDict: [String: Bool]) {
         println("filtersDidChange in ViewController")
+        println(filtersDict)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
