@@ -18,6 +18,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var searchBar: UISearchBar!
     
+    var categoryFilter: [String]?
+    
     // You can register for Yelp API keys here: http://www.yelp.com/developers/manage_api_keys
     let yelpConsumerKey = "6JNzXvGKzzb8VKOaR-TfYQ"
     let yelpConsumerSecret = "evystiqHI1q2JywYEFxtwuJEnvE"
@@ -42,8 +44,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view, typically from a nib.
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
-        searchYelp("Thai", categoryFilter: nil)
-        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -57,20 +57,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchBar = UISearchBar()
         navigationItem.titleView = searchBar
         searchBar.delegate = self
+        
+        searchYelp()
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        // TODO: Maintain own variable for category filter, update when it changes from
-        // delegate, pass it in here.
-        searchYelp(searchText, categoryFilter: nil)
+        searchYelp()
     }
     
-    private func searchYelp(searchTerm: String, categoryFilter: [String]?) {
-        client.searchWithTerm(searchTerm, categoryFilter: categoryFilter, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+    private func searchYelp() {
+        client.searchWithTerm(searchBar.text, categoryFilter: categoryFilter, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             if let businessesInfo = response["businesses"] as? [NSDictionary] {
                 self.businesses = businessesInfo.map({ (dict) in
                     Business(fromBusinessInfoDict: dict)
                 })
+                let businessNames = self.businesses.map({ (business) in
+                    business.name
+                })
+                println("\(businessNames.count) businesses found from API: \(businessNames)")
                 
                 self.tableView.reloadData()
             }
@@ -99,8 +103,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func filtersViewController(filtersViewController: UIViewController, filtersDidChange categoryFilter: [String]) {
-        searchYelp("Thai", categoryFilter: categoryFilter)
+    func filtersViewController(filtersViewController: UIViewController, filtersDidChange newCategoryFilter: [String]) {
+        categoryFilter = newCategoryFilter
+        searchYelp()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
