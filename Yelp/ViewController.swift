@@ -16,6 +16,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var client: YelpClient!
     
+    var searchBar: UISearchBar!
+    
     // You can register for Yelp API keys here: http://www.yelp.com/developers/manage_api_keys
     let yelpConsumerKey = "6JNzXvGKzzb8VKOaR-TfYQ"
     let yelpConsumerSecret = "evystiqHI1q2JywYEFxtwuJEnvE"
@@ -29,6 +31,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    @IBAction func onTap(sender: AnyObject) {
+        searchBar.endEditing(true)
     }
     
     override func viewDidLoad() {
@@ -47,6 +53,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.rowHeight = UITableViewAutomaticDimension
         
         self.title = "Yelp"
+        
+        searchBar = UISearchBar()
+        navigationItem.titleView = searchBar
     }
     
     private func searchYelp(searchTerm: String, categoryFilter: [String]?) {
