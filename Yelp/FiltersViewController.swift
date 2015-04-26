@@ -8,9 +8,7 @@
 
 import UIKit
 
-// TODO: Pass filter state back in from main ViewController, so that selections are persisted
-// during app session
-
+// TODO: Implement these other filters
 //let filterSections: [String] = ["Categories", "Sort", "Radius", "Deals"]
 let filterSections: [String] = ["Categories", "Sort"]
 
@@ -26,8 +24,7 @@ struct FilterConfiguration {
         self.categories = categories
         self.selectedSort = selectedSort
     }
-    // TODO: Should centralize this data format somewhere (it can be either
-    // "rating" or "distance". Defined here, and in SortCell)
+
     static func defaultConfiguration() -> FilterConfiguration {
         return FilterConfiguration([String](), selectedSort: SortOption.Rating)
     }
@@ -212,11 +209,9 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
         ["name" : "Wraps", "code": "wraps"],
         ["name" : "Yugoslav", "code": "yugoslav"]]
     
-    var filtersEnabledState: [Int: Bool] = [Int: Bool]()
+    var ownFilterConfiguration: FilterConfiguration!
     
     weak var delegate: FiltersViewControllerDelegate?
-    
-    var selectedSort: SortOption = SortOption.Distance
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -226,13 +221,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func onApply(sender: AnyObject) {
         if let delegate = delegate {
-            var enabledCategories = [String]()
-            for (index, categoryDict) in enumerate(categories) {
-                if filtersEnabledState[index]! {
-                    enabledCategories.append(categoryDict["code"]!)
-                }
-            }
-            delegate.filtersViewController(self, filtersDidChange: FilterConfiguration(enabledCategories, selectedSort:selectedSort))
+            delegate.filtersViewController(self, filtersDidChange: ownFilterConfiguration)
         } else {
             println("Error: no delegate in FiltersViewController onApply")
         }
@@ -244,11 +233,6 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
 
         tableView.dataSource = self
         tableView.delegate = self
-        
-        // TODO: some kind of persistence for filters enabled state?
-        for index in 0...categories.count {
-            filtersEnabledState[index] = false
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -260,25 +244,26 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
         if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("SortCell", forIndexPath: indexPath) as SortCell
             cell.delegate = self
-            cell.sortOption = selectedSort
+            cell.sortOption = ownFilterConfiguration.selectedSort
             return cell
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
-        cell.typeLabel.text = categories[indexPath.row]["name"]
-        if let enabledState = filtersEnabledState[indexPath.row] {
-            cell.mySwitch.on = enabledState
-        } else {
-            cell.mySwitch.on = false
-        }
+        let cellCategory = categories[indexPath.row]
+        cell.typeLabel.text = cellCategory["name"]
+        
+        // TODO: This is inefficient but simple. If the category 'code' is in filterConfiguration.categories, then it's
+        // on, otherwise it's off.
+        // Faster would be to have FilterConfiguration with some method for looking up whether it's enabled using the
+        // index, in constant time. I wish my version of Swift had Sets.
+        cell.mySwitch.on = contains(ownFilterConfiguration.categories, cellCategory["code"]!)
+        
         cell.delegate = self
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-//             return categories.count
-//            XXX: UNDO
-            return 1
+             return categories.count
         } else {
             return 1
         }
@@ -287,10 +272,19 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     func filterCell(filterCell: FilterCell, switchValueDidChange switchValue: Bool) {
         let maybeIndexPath = tableView.indexPathForCell(filterCell)
         if let indexPath = maybeIndexPath {
-            filtersEnabledState[indexPath.row] = switchValue
+            let code = categories[indexPath.row]["code"]!
+            if switchValue {
+                ownFilterConfiguration.categories.append(code)
+            } else {
+                let newCategories = ownFilterConfiguration.categories.filter({ (categoryCode) -> Bool in
+                    code != categoryCode
+                })
+                ownFilterConfiguration.categories = newCategories
+            }
         } else {
             println("Error: no index path for cell in switchValueDidChange")
         }
+        println("after switch changed, categories are now: \(ownFilterConfiguration.categories)")
     }
     
     // Methods for table view section functionality below
@@ -304,8 +298,8 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func sortCell(sortCell: SortCell, sortChanged newSortValue: SortOption) {
-        selectedSort = newSortValue
-        println("selected sort is now: \(selectedSort)")
+        ownFilterConfiguration.selectedSort = newSortValue
+        println("selected sort is now: \(ownFilterConfiguration.selectedSort)")
     }
     
 

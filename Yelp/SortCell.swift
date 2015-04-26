@@ -21,7 +21,11 @@ class SortCell: UITableViewCell {
     
     weak var delegate: SortCellDelegate?
     
-    var sortOption: SortOption?
+    var sortOption: SortOption? {
+        didSet {
+            sortControl.selectedSegmentIndex = indexesBySortOption[sortOption!]!
+        }
+    }
     
     @IBAction func onSortChanges(sender: AnyObject) {
         println("sort changed: \(sortControl.selectedSegmentIndex)")
@@ -34,13 +38,6 @@ class SortCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        if let sortOption = sortOption {
-            sortControl.selectedSegmentIndex = indexesBySortOption[sortOption]!
-        } else {
-            println("SortCell: No sortOption in awakeFromNib")
-            sortControl.selectedSegmentIndex = indexesBySortOption[SortOption.Rating]!
-        }
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

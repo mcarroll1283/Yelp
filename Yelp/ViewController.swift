@@ -118,6 +118,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let nc = segue.destinationViewController as UINavigationController
         if let fvc = nc.topViewController as? FiltersViewController {
             fvc.delegate = self
+            fvc.ownFilterConfiguration = filterConfiguration
         }
     }
 
