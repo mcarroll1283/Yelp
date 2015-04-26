@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -56,6 +56,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         searchBar = UISearchBar()
         navigationItem.titleView = searchBar
+        searchBar.delegate = self
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        // TODO: Maintain own variable for category filter, update when it changes from
+        // delegate, pass it in here.
+        searchYelp(searchText, categoryFilter: nil)
     }
     
     private func searchYelp(searchTerm: String, categoryFilter: [String]?) {
