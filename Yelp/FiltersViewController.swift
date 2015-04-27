@@ -249,6 +249,16 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let nc = navigationController {
+            nc.navigationBar.barTintColor = UIColor(red:0.82, green:0.09, blue:0.02, alpha:1)
+            nc.navigationBar.tintColor = UIColor.whiteColor()
+        } else {
+            println("no navigation controller?")
+        }
+        
+        navigationItem.title = "Filters"
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
 
         tableView.dataSource = self
         tableView.delegate = self

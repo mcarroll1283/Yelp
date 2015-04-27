@@ -41,7 +41,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        if let nc = navigationController {
+            nc.navigationBar.barTintColor = UIColor(red:0.82, green:0.09, blue:0.02, alpha:1)
+            nc.navigationBar.tintColor = UIColor.whiteColor()
+        } else {
+            println("no navigation controller?")
+        }
+
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
         tableView.dataSource = self
