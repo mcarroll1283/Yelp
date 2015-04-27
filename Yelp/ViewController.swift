@@ -66,7 +66,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     private func searchYelp() {
-        client.searchWithTerm(searchBar.text, categoryFilter: filterConfiguration.categories, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        client.searchWithTerm(searchBar.text, filterConfiguration: filterConfiguration, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             if let businessesInfo = response["businesses"] as? [NSDictionary] {
                 self.businesses = businessesInfo.map({ (dict) in
                     Business(fromBusinessInfoDict: dict)
@@ -81,12 +81,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     return businessA.isSortedBefore(businessB, selectedSort: self.filterConfiguration.selectedSort)
                 })
                 
-                if let radiusMax = self.filterConfiguration.selectedRadius.radiusInMeters() {
-                    self.businesses = self.businesses.filter({ (business) -> Bool in
-                        business.distanceMeters <= radiusMax
-                    })
-                }
-                  
                 self.tableView.reloadData()
             }
             }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
