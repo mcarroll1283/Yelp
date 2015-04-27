@@ -77,10 +77,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 })
                 println("\(businessNames.count) businesses found from API: \(businessNames)")
                 
-                self.businesses.sort({ (businessA, businessB) -> Bool in
-                    return businessA.isSortedBefore(businessB, selectedSort: self.filterConfiguration.selectedSort)
-                })
-                
                 self.tableView.reloadData()
             }
             }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in

@@ -8,8 +8,8 @@
 
 import UIKit
 
-let sortOptionsByIndex = [SortOption.Distance, SortOption.Rating]
-let indexesBySortOption = [SortOption.Distance: 0, SortOption.Rating: 1]
+let sortOptionsByIndex = [SortOption.Distance, SortOption.Rating, SortOption.BestMatch]
+let indexesBySortOption = [SortOption.Distance: 0, SortOption.Rating: 1, SortOption.BestMatch: 2]
 
 protocol SortCellDelegate: class {
     func sortCell(sortCell: SortCell, sortChanged newSortValue: SortOption)

@@ -15,6 +15,7 @@ let filterSections: [String] = ["Categories", "Sort", "Radius"]
 enum SortOption {
     case Rating
     case Distance
+    case BestMatch
 }
 
 enum RadiusOption {
@@ -43,7 +44,7 @@ struct FilterConfiguration {
     }
 
     static func defaultConfiguration() -> FilterConfiguration {
-        return FilterConfiguration([String](), selectedSort: SortOption.Rating, selectedRadius: RadiusOption.Any)
+        return FilterConfiguration([String](), selectedSort: SortOption.BestMatch, selectedRadius: RadiusOption.Any)
     }
 }
 

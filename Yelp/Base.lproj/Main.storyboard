@@ -212,10 +212,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1fo-HP-VPI">
-                                                    <rect key="frame" x="94" y="18" width="218" height="29"/>
+                                                    <rect key="frame" x="58" y="18" width="254" height="29"/>
                                                     <segments>
                                                         <segment title="Distance"/>
-                                                        <segment title="Highest Rated"/>
+                                                        <segment title="Rating"/>
+                                                        <segment title="Best Match"/>
                                                     </segments>
                                                     <connections>
                                                         <action selector="onSortChanges:" destination="CDA-sh-CpK" eventType="valueChanged" id="aw1-15-Og1"/>
@@ -240,7 +241,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gb1-c9-tyq">
-                                                    <rect key="frame" x="96" y="16" width="216" height="29"/>
+                                                    <rect key="frame" x="58" y="16" width="254" height="29"/>
                                                     <segments>
                                                         <segment title="Any"/>
                                                         <segment title="1000m"/>

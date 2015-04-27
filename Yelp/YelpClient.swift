@@ -29,10 +29,17 @@ class YelpClient: BDBOAuth1RequestOperationManager {
     func searchWithTerm(term: String, filterConfiguration: FilterConfiguration, success: (AFHTTPRequestOperation!, AnyObject!) -> Void, failure: (AFHTTPRequestOperation!, NSError!) -> Void) -> AFHTTPRequestOperation! {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         let categoryFilter = ",".join(filterConfiguration.categories)
-
-
         let radiusFilter = "\(filterConfiguration.selectedRadius.radiusInMeters())"
         var parameters = ["term": term, "ll": "37.7833,-122.4167", "category_filter": categoryFilter]
+        
+        switch filterConfiguration.selectedSort {
+        case SortOption.BestMatch:
+            parameters["sort"] = "0"
+        case SortOption.Distance:
+            parameters["sort"] = "1"
+        case SortOption.Rating:
+            parameters["sort"] = "2"
+        }
         
         if let maxRadiusMeters = filterConfiguration.selectedRadius.radiusInMeters() {
             parameters["radius_filter"] = NSString(format: "%.0f", maxRadiusMeters)
