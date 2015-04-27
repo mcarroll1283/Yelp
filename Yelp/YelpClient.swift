@@ -30,7 +30,8 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         let categoryFilter = ",".join(filterConfiguration.categories)
         let radiusFilter = "\(filterConfiguration.selectedRadius.radiusInMeters())"
-        var parameters = ["term": term, "ll": "37.7833,-122.4167", "category_filter": categoryFilter]
+        let dealsFilter = "\(filterConfiguration.dealsOnly)"
+        var parameters = ["term": term, "ll": "37.7833,-122.4167", "category_filter": categoryFilter, "deals_filter": dealsFilter]
         
         switch filterConfiguration.selectedSort {
         case SortOption.BestMatch:

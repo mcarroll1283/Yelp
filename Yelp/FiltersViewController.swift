@@ -8,9 +8,7 @@
 
 import UIKit
 
-// TODO: Implement these other filters
-//let filterSections: [String] = ["Categories", "Sort", "Radius", "Deals"]
-let filterSections: [String] = ["Categories", "Sort", "Radius"]
+let filterSections: [String] = ["Categories", "Sort", "Radius", "Deals"]
 
 enum SortOption {
     case Rating
@@ -37,14 +35,17 @@ struct FilterConfiguration {
     var categories: [String]
     var selectedSort: SortOption
     var selectedRadius: RadiusOption
-    init(_ categories: [String], selectedSort: SortOption, selectedRadius: RadiusOption) {
+    var dealsOnly: Bool
+    
+    init(_ categories: [String], selectedSort: SortOption, selectedRadius: RadiusOption, dealsOnly: Bool) {
         self.categories = categories
         self.selectedSort = selectedSort
         self.selectedRadius = selectedRadius
+        self.dealsOnly = dealsOnly
     }
 
     static func defaultConfiguration() -> FilterConfiguration {
-        return FilterConfiguration([String](), selectedSort: SortOption.BestMatch, selectedRadius: RadiusOption.Any)
+        return FilterConfiguration([String](), selectedSort: SortOption.BestMatch, selectedRadius: RadiusOption.Any, dealsOnly: false)
     }
 }
 
@@ -278,10 +279,16 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.delegate = self
             cell.sortOption = ownFilterConfiguration.selectedSort
             return cell
-        default: // 2
+        case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier("RadiusCell", forIndexPath: indexPath) as RadiusCell
             cell.delegate = self
             cell.radiusOption = ownFilterConfiguration.selectedRadius
+            return cell
+        default: //3
+            let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath) as FilterCell
+            cell.typeLabel.text = "Deals Only"
+            cell.mySwitch.on = ownFilterConfiguration.dealsOnly
+            cell.delegate = self
             return cell
         }
 
@@ -290,7 +297,6 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-//            return 3
             return categories.count
         
         case 1:
@@ -304,7 +310,14 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func filterCell(filterCell: FilterCell, switchValueDidChange switchValue: Bool) {
         let maybeIndexPath = tableView.indexPathForCell(filterCell)
-        if let indexPath = maybeIndexPath {
+        if maybeIndexPath == nil {
+            println("Error: no index path for cell in switchValueDidChange")
+            return
+        }
+        
+        let indexPath = maybeIndexPath!
+        switch indexPath.section {
+        case 0: // Categories
             let code = categories[indexPath.row]["code"]!
             if switchValue {
                 ownFilterConfiguration.categories.append(code)
@@ -314,10 +327,11 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
                 })
                 ownFilterConfiguration.categories = newCategories
             }
-        } else {
-            println("Error: no index path for cell in switchValueDidChange")
+        case 3: // Deals Only
+            ownFilterConfiguration.dealsOnly = switchValue
+        default:
+            println("Error: FilterCellDelegate from unknown section")
         }
-        println("after switch changed, categories are now: \(ownFilterConfiguration.categories)")
     }
     
     // Methods for table view section functionality below
