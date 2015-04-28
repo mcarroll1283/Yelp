@@ -188,13 +188,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yelp/FiltersViewController.swift"
-            timestampString = "451884865.712835"
+            timestampString = "451886628.475271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
-            landmarkName = "FiltersViewController"
-            landmarkType = "3">
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "tableView(_:titleForHeaderInSection:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -204,13 +204,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yelp/FiltersViewController.swift"
-            timestampString = "451884865.712835"
+            timestampString = "451886628.475271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
-            landmarkName = "FiltersViewController"
-            landmarkType = "3">
+            startingLineNumber = "358"
+            endingLineNumber = "358"
+            landmarkName = "sortCell(_:sortChanged:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
