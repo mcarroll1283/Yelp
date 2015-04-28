@@ -98,7 +98,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as BusinessCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell") as BusinessCell
         cell.business = businesses[indexPath.row]
         return cell
     }
@@ -123,6 +123,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             fvc.delegate = self
             fvc.ownFilterConfiguration = filterConfiguration
         }
+    }
+    
+    // Hack from Sommer:
+    // This is doing what autolayout *should* be doing which using the constraints to determine cell
+    // height as needed. Currently, even with correctly setting prefferedMaxLayoutWidth on
+    // labels within cells, heights calculated correctly at all times.
+    // If you use this you MUST call dequeueReusableCellWithIdentifier, NOT
+    // dequeueReusableCellWithIdentifier:atIndexPath in your cellForRow:atIndexPath method.
+    // Otherwise you will crash. Again - this is a HACK and not good iOS dev.
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let contentView: UIView = tableView.dataSource!.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        contentView.updateConstraintsIfNeeded()
+        contentView.layoutIfNeeded()
+        return contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
     }
 
 }
