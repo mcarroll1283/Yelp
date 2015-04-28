@@ -190,6 +190,7 @@
                                                 <constraint firstItem="nya-Fd-TJe" firstAttribute="top" secondItem="SvB-Dn-bHp" secondAttribute="top" constant="6" id="0FO-rO-2aW"/>
                                                 <constraint firstItem="1J4-Lv-Gd4" firstAttribute="top" secondItem="SvB-Dn-bHp" secondAttribute="top" constant="11" id="0sh-RN-zrZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="nya-Fd-TJe" secondAttribute="trailing" constant="8" id="DfR-Uj-cLJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="1J4-Lv-Gd4" secondAttribute="bottom" constant="12" id="I7l-Zi-ZD8"/>
                                                 <constraint firstItem="1J4-Lv-Gd4" firstAttribute="leading" secondItem="SvB-Dn-bHp" secondAttribute="leading" constant="8" id="TOA-zu-s1A"/>
                                                 <constraint firstItem="nya-Fd-TJe" firstAttribute="leading" secondItem="1J4-Lv-Gd4" secondAttribute="trailing" constant="8" id="fns-Cq-YXl"/>
                                             </constraints>
@@ -205,9 +206,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CDA-sh-CpK" id="UUC-jP-rbw">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sort" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eM1-ig-gYa">
-                                                    <rect key="frame" x="8" y="21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eM1-ig-gYa">
+                                                    <rect key="frame" x="8" y="21" width="23.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -223,6 +224,11 @@
                                                     </connections>
                                                 </segmentedControl>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="eM1-ig-gYa" firstAttribute="leading" secondItem="UUC-jP-rbw" secondAttribute="leading" constant="8" id="3xM-ou-qGR"/>
+                                                <constraint firstAttribute="bottom" secondItem="eM1-ig-gYa" secondAttribute="bottom" constant="22" id="Al6-ge-ktd"/>
+                                                <constraint firstItem="eM1-ig-gYa" firstAttribute="top" secondItem="UUC-jP-rbw" secondAttribute="top" constant="21" id="qod-dt-KHX"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="sortControl" destination="1fo-HP-VPI" id="6aU-g3-oWC"/>
@@ -234,8 +240,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BPB-Fd-JQs" id="1yO-nf-2Kt">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Radius" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDN-Zq-b53">
-                                                    <rect key="frame" x="8" y="19" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radius" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDN-Zq-b53">
+                                                    <rect key="frame" x="8" y="25.5" width="38.5" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -252,6 +258,11 @@
                                                     </connections>
                                                 </segmentedControl>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="MDN-Zq-b53" secondAttribute="bottom" constant="18.5" id="1OS-I1-r1D"/>
+                                                <constraint firstItem="MDN-Zq-b53" firstAttribute="leading" secondItem="1yO-nf-2Kt" secondAttribute="leading" constant="8" id="W9f-Lm-Qrm"/>
+                                                <constraint firstItem="MDN-Zq-b53" firstAttribute="top" secondItem="1yO-nf-2Kt" secondAttribute="top" constant="25.5" id="cNV-9o-9Yg"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="radiusControl" destination="gb1-c9-tyq" id="40X-fQ-uL4"/>
